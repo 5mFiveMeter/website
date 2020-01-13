@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fivemeter.website.dao.MenuMapper">
+  <resultMap id="BaseResultMap" type="cn.fivemeter.website.model.Menu">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="menu_id" jdbcType="VARCHAR" property="menuId" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
+    <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, menu_id, menu_name, menu_url, menu_icon
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from menus
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from menus
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.fivemeter.website.model.Menu">
+    insert into menus (id, menu_id, menu_name, 
+      menu_url, menu_icon)
+    values (#{id,jdbcType=INTEGER}, #{menuId,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, 
+      #{menuUrl,jdbcType=VARCHAR}, #{menuIcon,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.fivemeter.website.model.Menu">
+    insert into menus
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="menuId != null">
+        menu_id,
+      </if>
+      <if test="menuName != null">
+        menu_name,
+      </if>
+      <if test="menuUrl != null">
+        menu_url,
+      </if>
+      <if test="menuIcon != null">
+        menu_icon,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="menuId != null">
+        #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null">
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIcon != null">
+        #{menuIcon,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.fivemeter.website.model.Menu">
+    update menus
+    <set>
+      <if test="menuId != null">
+        menu_id = #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null">
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        menu_url = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIcon != null">
+        menu_icon = #{menuIcon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.fivemeter.website.model.Menu">
+    update menus
+    set menu_id = #{menuId,jdbcType=VARCHAR},
+      menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_url = #{menuUrl,jdbcType=VARCHAR},
+      menu_icon = #{menuIcon,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
